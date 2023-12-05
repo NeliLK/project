@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}">
+</head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<body>
+
+<div class="container table-container">
+<h2>Appointments</h2>
+<table class="table-appointments">
+    <thead>
+    <tr>
+<!--        <th>ID</th>-->
+        <th>Pet</th>
+        <th>Vet</th>
+        <th>Appointment date and time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${appointments}">
+<!--        <td th:text="${appointment.id}"></td>-->
+        <td th:text="${appointment.petName}"></td>
+        <td th:text="${appointment.vetName}"></td>
+        <td th:text="${#temporals.format(appointment.appointmentDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+<!--        <td th:text="${#temporals.format(appointment.appointmentDate)}"></td>-->
+    </tr>
+    </tbody>
+</table>
+</div>
+
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

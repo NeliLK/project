@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Make an appointment</span></h1>
+    <hr class="hr-3 w-25 bg-white"/>
+
+    <form class="mx-auto w-25 bg-blur rounded"
+          th:method="POST"
+          th:action="@{/appointments/add}"
+          th:object="${appointmentAddBindingModel}">
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="petName" class="h4 mb-2">Pet Name</label>
+            </div>
+            <select class="form-control" id="petName" th:field="*{petName}" th:errorclass="bg-danger">
+                <option value="" disabled selected>Select a Pet Name</option>
+                <option th:each="petName : ${petNames}" th:value="${petName}" th:text="${petName}"></option>
+            </select>
+            <small th:if="${#fields.hasErrors('petName')}"
+                   th:errors="*{petName}" class="text-danger">Pet name error message</small>
+        </div>
+
+        <div class="label-holder text-white textCol d-flex justify-content-center">
+            <label for="vetName" class="h4 mb-2">Vet Name</label>
+        </div>
+        <select class="form-control" id="vetName" th:field="*{vetName}" th:errorclass="bg-danger">
+            <option value="" disabled selected>Select a Vet Name</option>
+            <option th:each="vetName : ${vetNames}" th:value="${vetName}" th:text="${vetName}"></option>
+        </select>
+        <small th:if="${#fields.hasErrors('vetName')}"
+               th:errors="*{vetName}" class="text-danger">Vet name error message</small>
+
+        <div class="form-group">
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="appointmentDateTime" class="h4 mb-2">Set appointment date and time</label>
+                </div>
+                <input type="datetime-local" class="form-control" id="appointmentDateTime"
+                       th:field="*{appointmentDateTime}" th:errorclass="bg-danger">
+                <small th:if="${#fields.hasErrors('appointmentDateTime')}"
+                       th:errors="*{appointmentDateTime}" class="text-danger">Appointment Date and Time error
+                    message</small>
+            </div>
+            <!--        <div class="form-group">-->
+            <!--            <div class="label-holder text-white textCol d-flex justify-content-center">-->
+            <!--                <label for="dueDate" class="h4 mb-2">Set appointment date</label>-->
+            <!--            </div>-->
+            <!--            <input type="date" class="form-control" id="dueDate"-->
+            <!--                   th:field="*{appointmentDate}"-->
+            <!--                   th:errorclass="bg-danger">-->
+            <!--            <small th:if="${#fields.hasErrors('appointmentDate')}"-->
+            <!--                   th:errors="*{appointmentDate}" class="text-danger">Appointment Date error message</small>-->
+            <!--        </div>-->
+
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="btn btn-warning  mb-3" value="Register">Make an appointment</button>
+            </div>
+        </div>
+    </form>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

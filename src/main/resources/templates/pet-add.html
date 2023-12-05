@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}">
+    <script th:src="@{/js/success-message.js}" defer="defer"></script>
+</head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<body>
+<!-- Display success message if redirected with "?success" -->
+<div th:if="${param.success}" id="successMessage">
+    <p class="text-success">Pet added successfully!</p>
+</div>
+<main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Pet</span></h1>
+    <hr class="hr-3 w-25 bg-white"/>
+
+    <form class="mx-auto w-25 bg-blur rounded"
+          th:method="POST"
+          th:action="@{/pets/add}"
+          th:object="${petAddBindingModel}">
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="description" class="h4 mb-2">Pet Name</label>
+            </div>
+            <textarea type="text" class="form-control" id="description"
+                      th:field="*{petName}"
+                      th:errorclass="bg-danger"></textarea>
+            <small th:if="${#fields.hasErrors('petName')}"
+                   th:errors="*{petName}" class="text-danger">Pet name error message</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="description" class="h4 mb-2">Specie</label>
+            </div>
+            <textarea type="text" class="form-control" id="specie"
+                      th:field="*{specie}"
+                      th:errorclass="bg-danger"></textarea>
+            <small th:if="${#fields.hasErrors('specie')}"
+                   th:errors="*{specie}" class="text-danger">Specie error message</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="description" class="h4 mb-2">Age</label>
+            </div>
+            <textarea type="text" class="form-control" id="age"
+                      th:field="*{age}"
+                      th:errorclass="bg-danger"></textarea>
+            <small th:if="${#fields.hasErrors('age')}"
+                   th:errors="*{age}" class="text-danger">Age error message</small>
+        </div>
+        </div>
+
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-warning  mb-3" value="Register">Add Pet</button>
+        </div>
+
+    </form>
+</main>
+
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

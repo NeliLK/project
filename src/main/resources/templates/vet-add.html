@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}">
+  <script th:src="@{/js/success-message.js}" defer="defer"></script>
+</head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<body>
+<main>
+  <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Pet</span></h1>
+  <hr class="hr-3 w-25 bg-white"/>
+
+  <form class="mx-auto w-25 bg-blur rounded"
+        th:method="POST"
+        th:action="@{/vets/add}"
+        th:object="${vetAddBindingModel}">
+
+    <div class="form-group">
+      <div class="label-holder text-white textCol d-flex justify-content-center">
+        <label for="description" class="h4 mb-2">Vet Name</label>
+      </div>
+      <textarea type="text" class="form-control" id="description"
+                th:field="*{vetName}"
+                th:errorclass="bg-danger"></textarea>
+      <small th:if="${#fields.hasErrors('vetName')}"
+             th:errors="*{vetName}" class="text-danger">Vet name error message</small>
+    </div>
+    <div class="form-group">
+      <div class="label-holder text-white textCol d-flex justify-content-center">
+        <label for="description" class="h4 mb-2">Specialization</label>
+      </div>
+      <textarea type="text" class="form-control" id="specie"
+                th:field="*{specialization}"
+                th:errorclass="bg-danger"></textarea>
+      <small th:if="${#fields.hasErrors('specialization')}"
+             th:errors="*{specialization}" class="text-danger">Specialization error message</small>
+    </div>
+
+    <div class="button-holder d-flex justify-content-center">
+      <button type="submit" class="btn btn-warning  mb-3" value="Register">Add Vet</button>
+    </div>
+
+  </form>
+</main>
+
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

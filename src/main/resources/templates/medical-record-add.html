@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}">
+  <script th:src="@{/js/success-message.js}" defer="defer"></script>
+</head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<body>
+<!-- Display success message if redirected with "?success" -->
+<div th:if="${param.success}" id="successMessage">
+  <p class="text-success">Medical record added successfully!</p>
+</div>
+<main>
+  <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Medical Record</span></h1>
+  <hr class="hr-3 w-25 bg-white"/>
+
+  <form class="mx-auto w-50 bg-blur rounded"
+        th:method="POST"
+        th:action="@{/medical-records/add}"
+        th:object="${medicalRecordAddBindingModel}">
+
+    <select class="form-control" id="pet" th:field="*{pet}" th:errorclass="bg-danger">
+      <option value="" disabled selected>Select a Pet</option>
+      <option th:each="availablePet : ${availablePets}" th:value="${availablePet}" th:text="${availablePet}"></option>
+    </select>
+    <small th:if="${#fields.hasErrors('pet')}" th:errors="*{pet}" class="text-danger">Pet selection error message</small>
+
+    <div class="form-group">
+      <label for="diagnostic" class="h4 mb-2">Diagnostic</label>
+      <textarea type="text" class="form-control" id="diagnostic"
+                th:field="*{diagnostic}"
+                th:errorclass="bg-danger"></textarea>
+      <small th:if="${#fields.hasErrors('diagnostic')}" th:errors="*{diagnostic}" class="text-danger">Diagnostic error message</small>
+    </div>
+
+    <div class="form-group">
+      <label for="treatment" class="h4 mb-2">Treatment</label>
+      <textarea type="text" class="form-control" id="treatment"
+                th:field="*{treatment}"
+                th:errorclass="bg-danger"></textarea>
+      <small th:if="${#fields.hasErrors('treatment')}" th:errors="*{treatment}" class="text-danger">Treatment error message</small>
+    </div>
+
+    <div class="button-holder d-flex justify-content-center">
+      <button type="submit" class="btn btn-warning mb-3">Add Medical record</button>
+    </div>
+  </form>
+</main>
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>
