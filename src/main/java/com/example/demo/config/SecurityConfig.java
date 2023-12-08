@@ -27,7 +27,8 @@ public class SecurityConfig {
                         .requestMatchers("/admin/user").hasRole(UserRoleEnum.ADMIN.name())
                         .requestMatchers("/vets/add").hasRole(UserRoleEnum.ADMIN.name())
                         .requestMatchers("/medical-records/add").hasRole(UserRoleEnum.ADMIN.name())
-
+//                        .requestMatchers("/appointments/add").hasRole(UserRoleEnum.USER.name())
+//                        .requestMatchers("/pets/add").hasRole(UserRoleEnum.USER.name())
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin -> {

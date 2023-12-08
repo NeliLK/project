@@ -67,6 +67,13 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<AppointmentViewModel> getAllAppointments() {
+        return appointmentRepository.findAll().stream()
+                .map(appointment -> modelMapper.map(appointment, AppointmentViewModel.class))
+                .collect(Collectors.toList());
+    }
+
     private String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();

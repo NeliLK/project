@@ -16,4 +16,6 @@ public interface PetService {
     List<String> getAllPetNames();
 
     List <PetViewModel> getHomeViewData();
+
+    List<PetViewModel> getAllPets();
 }

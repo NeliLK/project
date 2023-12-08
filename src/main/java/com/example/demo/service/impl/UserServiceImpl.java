@@ -8,7 +8,11 @@ import com.example.demo.model.enums.UserRoleEnum;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.UserRoleRepository;
 import com.example.demo.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Collections;
@@ -111,5 +115,16 @@ public class UserServiceImpl implements UserService {
         user.getRoles().clear();
         userRepository.save(user);
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User getLoggedInUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            return userRepository.findByUsername(((UserDetails) authentication.getPrincipal()).getUsername())
+                    .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        } else {
+            throw new IllegalStateException("User not authenticated");
+        }
     }
 }

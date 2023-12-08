@@ -34,7 +34,6 @@
                 <form th:action="@{/admin/user/add/role}" method="POST">
                     <input type="hidden" name="userId" th:value="${user.id}" />
                     <select name="newRole">
-                        <!-- Add options for selecting a new role from the UserRoleEnum -->
                         <option th:each="role : ${T(com.example.demo.model.enums.UserRoleEnum).values()}" th:value="${role}" th:text="${role}"></option>
                     </select>
                     <button type="submit" class="btn btn-success">Add Role</button>
@@ -44,14 +43,16 @@
                 <form th:action="@{/admin/user/remove/role}" method="POST">
                     <input type="hidden" name="userId" th:value="${user.id}" />
                     <select name="removeRole">
-                        <!-- Add options for selecting a role to remove from the user -->
                         <option th:each="role : ${user.roles}" th:value="${role}" th:text="${role}"></option>
                     </select>
                     <button type="submit" class="btn btn-danger">Remove Role</button>
                 </form>
             </td>
-            <td><a href="" th:href="@{/admin/user/delete/{id}(id=${user.id})}"
-                   class="btn btn-danger">Delete</a></td>
+            <td>
+                <div class="delete-button">
+                    <a href="" th:href="@{/admin/user/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

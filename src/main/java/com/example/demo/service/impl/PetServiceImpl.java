@@ -80,6 +80,16 @@ public class PetServiceImpl implements PetService {
 
         return petViewModels;
     }
+
+    @Override
+    public List<PetViewModel> getAllPets() {
+        List<Pet> allPets = petRepository.findAll();
+
+        return allPets.stream()
+                .map(pet -> modelMapper.map(pet, PetViewModel.class))
+                .collect(Collectors.toList());
+    }
+
     private String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication.getName() == null) {

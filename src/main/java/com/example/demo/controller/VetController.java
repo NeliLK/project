@@ -5,10 +5,7 @@ import com.example.demo.service.VetService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -27,7 +24,7 @@ public class VetController {
     }
 
     @PostMapping("/add")
-    public ModelAndView addPet(@ModelAttribute("vetAddBindingModel") @Valid VetAddBindingModel vetAddBindingModel,
+    public ModelAndView addVet(@ModelAttribute("vetAddBindingModel") @Valid VetAddBindingModel vetAddBindingModel,
                                BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -37,5 +34,12 @@ public class VetController {
         vetService.add(vetAddBindingModel);
 
         return new ModelAndView("redirect:/");
+    }
+
+    @GetMapping("/all")
+    public ModelAndView getAllVetNames() {
+        ModelAndView modelAndView = new ModelAndView("vet-all");
+        modelAndView.addObject("vetNames", vetService.getAllVetNames());
+        return modelAndView;
     }
 }

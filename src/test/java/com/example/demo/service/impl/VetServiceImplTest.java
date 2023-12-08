@@ -10,9 +10,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class VetServiceImplTest {
@@ -52,5 +54,12 @@ class VetServiceImplTest {
         assertEquals(Arrays.asList("Dr. Smith", "Dr. Johnson"), vetNames);
     }
 
+    @Test
+    void testGetAllVetNamesWhenEmpty() {
+        // Arrange
+        when(vetRepository.findAll()).thenReturn(Collections.emptyList());
 
+        // Act and Assert
+        assertThrows(RuntimeException.class, () -> vetService.getAllVetNames());
+    }
 }

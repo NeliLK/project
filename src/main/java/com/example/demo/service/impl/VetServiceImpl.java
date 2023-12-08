@@ -30,9 +30,9 @@ public class VetServiceImpl implements VetService {
     public List<String> getAllVetNames() {
         List<Vet> allVets = vetRepository.findAll();
 
-//        if (allVets.isEmpty()) {
-//            throw new RuntimeException("There are no vets available.");
-//        }
+        if (allVets.isEmpty()) {
+            throw new RuntimeException("There are no vets available.");
+        }
 
         return allVets.stream().map(Vet::getVetName).collect(Collectors.toList());
     }

@@ -18,8 +18,9 @@
         <a class="nav-link text-primary active h5 text-stroke" sec:authorize="isAuthenticated()" th:href="@{/appointments/all}" >Appointments</a>
         <a class="nav-link text-primary active h5 text-stroke" sec:authorize="isAuthenticated()" th:href="@{/appointments/add}" >Make an appointment</a>
         <a class="nav-link my-text-color active h5 text-orange" sec:authorize="isAuthenticated()" th:href="@{/pets/add}">Add Pet</a>
-        <a class="nav-link my-text-color active h5 text-orange" sec:authorize="isAuthenticated()" th:href="@{/pets/all}">My Pets</a>
+        <a class="nav-link my-text-color active h5 text-orange" sec:authorize="isAuthenticated()" th:href="@{/pets/all}">Pets</a>
         <a class="nav-link my-text-color active h5 text-orange" sec:authorize="hasRole('ADMIN')" th:href="@{/vets/add}">Add Vet</a>
+        <a class="nav-link my-text-color active h5 text-orange" sec:authorize="hasRole('ADMIN')" th:href="@{/vets/all}">All Vets</a>
         <a class="nav-link my-text-color active h5 text-orange" sec:authorize="hasRole('ADMIN')" th:href="@{/medical-records/add}">Add Medical record</a>
         <a class="nav-link my-text-color active h5 text-orange" sec:authorize="isAuthenticated()" th:href="@{/medical-records/all}">Medical records</a>
 

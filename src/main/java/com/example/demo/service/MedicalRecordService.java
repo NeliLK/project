@@ -13,4 +13,6 @@ public interface MedicalRecordService {
 //    void deleteMedicalRecord(Long id);
 
     List<MedicalRecordViewModel> getMedicalRecordsViewData();
+
+    List<MedicalRecordViewModel> getAllMedicalRecords();
 }

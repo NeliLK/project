@@ -20,11 +20,9 @@
     </thead>
     <tbody>
     <tr th:each="appointment : ${appointments}">
-<!--        <td th:text="${appointment.id}"></td>-->
         <td th:text="${appointment.petName}"></td>
         <td th:text="${appointment.vetName}"></td>
         <td th:text="${#temporals.format(appointment.appointmentDateTime, 'yyyy-MM-dd HH:mm')}"></td>
-<!--        <td th:text="${#temporals.format(appointment.appointmentDate)}"></td>-->
     </tr>
     </tbody>
 </table>

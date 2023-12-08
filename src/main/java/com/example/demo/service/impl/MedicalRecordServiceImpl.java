@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MedicalRecordServiceImpl implements MedicalRecordService {
@@ -60,6 +61,15 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
             }
         }
         return medicalRecordViewModels;
+    }
+
+    @Override
+    public List<MedicalRecordViewModel> getAllMedicalRecords() {
+        List<MedicalRecord> allMedicalRecords = medicalRecordRepository.findAll();
+
+        return allMedicalRecords.stream()
+                .map(record -> modelMapper.map(record, MedicalRecordViewModel.class))
+                .collect(Collectors.toList());
     }
 
     private String getCurrentUsername() {

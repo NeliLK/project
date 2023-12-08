@@ -9,4 +9,6 @@ public interface AppointmentService {
     void addAppointment(AppointmentAddBindingModel appointment);
 
     List<AppointmentViewModel> getAppointmentsForUser();
+
+    List<AppointmentViewModel> getAllAppointments();
 }

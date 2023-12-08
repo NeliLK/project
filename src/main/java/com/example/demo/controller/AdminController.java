@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.UserViewModel;
-import com.example.demo.model.entity.UserRoleEntity;
 import com.example.demo.model.enums.UserRoleEnum;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Controller;
